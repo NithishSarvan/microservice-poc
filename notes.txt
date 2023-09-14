@@ -1,0 +1,22 @@
+
+
+-------------Synchronous communication and Async Communication: --------
+
+--> Synchronous communication:
+        * one service depends on other service response
+        * To make Http request use 'WebClient'
+--> Asynchronous communication:
+        * one response not depends on other service response
+        * it doesn't care about other service response
+
+    Eg:-
+
+                        Http Request
+     1. Order Service ---------------> Inventory service (checking stock is available or not)
+                      <---------------
+                         Response
+
+         * Here order service waiting for inventory response , (Sync Communication)
+         * If does not care about inventory service means (Async Communication)
+
+---------------------------------------------------------------------------------
