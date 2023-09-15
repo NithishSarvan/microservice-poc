@@ -19,7 +19,7 @@ import java.util.UUID;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
     public void placeOrder(OrderRequest orderRequest){
 
@@ -32,8 +32,8 @@ public class OrderService {
         // Check whether the stock is available
         // Make Http Request for Inventory Service by using "WebClient(Web flux) "
 
-        InventoryResponse[] inventoryResponses = webClient.get()
-                .uri("http://localhost:8777/api/inventory",
+        InventoryResponse[] inventoryResponses = webClientBuilder.build().get()
+                .uri("http://inventory-service/api/inventory",
                         uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
                 .retrieve()
                 .bodyToMono(InventoryResponse[].class)

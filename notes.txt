@@ -20,3 +20,11 @@
          * If does not care about inventory service means (Async Communication)
 
 ---------------------------------------------------------------------------------
+
+                         ** SERVICE DISCOVERY **
+
+1. Also known as 'Discovery Server' , its place where the all services are located  and its instance
+2. With the Netflix Eureka Server and client
+3. If discovery server is shutdown or its not available, instance of the service stores locally
+4. Default port for Eureka server = 8761
+5.
