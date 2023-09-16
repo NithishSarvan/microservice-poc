@@ -27,4 +27,20 @@
 2. With the Netflix Eureka Server and client
 3. If discovery server is shutdown or its not available, instance of the service stores locally
 4. Default port for Eureka server = 8761
-5.
+
+-----------------------------------------------------------------------------------
+
+                          **  API-GATEWAY **
+
+1. Its entry level
+2. Routing requests from clients to the appropriate backend service and then returning the service’s response back to the client.
+3. An API gateway can also perform tasks such as authentication, rate limiting, and caching.
+4. Spring cloud Gateway provides a library for building an API Gateway
+5. Important parts of Spring cloud Gateway
+          1. Route: which contain the URL to which the request is to be forwarded to
+
+          2. Predicates:the set of criteria that should match for the incoming requests to be forwarded to internal microservices.
+          For example, a path predicate will forward the request only if the incoming URL contains that path.
+
+          3. Filter: These act as the place where you can modify the incoming requests
+           before sending the requests to the internal microservices or before responding back to the client.
