@@ -44,3 +44,41 @@
 
           3. Filter: These act as the place where you can modify the incoming requests
            before sending the requests to the internal microservices or before responding back to the client.
+
+--------------------------------------------------------------------------------------
+
+                        ** Circuit Breakers **
+
+1. If there is any issue while communicate with other service , that service have some network issue or db issue
+circuit breakers will tack care of it
+2. Three states of circuit breakers are
+        1.Closed:When both services which are interacting are up and running(Communicating well)
+        2.Open:As soon as the percentage of failing remote API calls is exceeding the given threshold,
+         circuit breaker changes its state to OPEN state
+        3.Half Open:After staying at OPEN state for a given timeout period,
+        breaker automatically turns its state into HALF OPEN state
+
+3.Resilience4j:
+      *  Resilience4j is a lightweight, easy-to-use fault tolerance library inspired by
+         Netflix Hystrix.
+
+      *  It provides various features.
+
+         Circuit Breaker — fault tolerance
+         Rate Limiter — block too many requests
+         Time Limiter — limit time while calling remote operations
+         Retry Mechanism — automatic retry for failed operations
+         Bulkhead — limit number of concurrent requests
+         Cache — store results of costly remote operations
+
+---------------------------------------------------------------------------------
+
+                    ** Distributed tracing **
+
+1. To trace the request from start to end
+2. Trace id is entire flow id.
+3. Span id is particular flow id
+4.Spring Cloud Sleuth is used to generate and attach the trace id, span id to the logs so that these can then be used
+ by tools like Zipkin and ELK for storage and analysis
+5. Zipkin is a distributed tracing system. It helps gather timing data needed to troubleshoot
+latency problems in service architectures. Features include both the collection and lookup of this data.

@@ -11,6 +11,7 @@
         <module name="product-service" />
         <module name="inventory-service" />
         <module name="discovery-server" />
+        <module name="notification-service" />
         <module name="orderservice" />
       </profile>
     </annotationProcessing>
@@ -30,6 +31,7 @@
       <module name="discovery-server" options="-parameters" />
       <module name="inventory" options="-parameters" />
       <module name="inventory-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
       <module name="orderservice" options="-parameters" />
       <module name="orderservice (2)" options="-parameters" />
       <module name="product-service" options="-parameters" />

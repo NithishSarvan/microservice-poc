@@ -3,10 +3,12 @@ package com.nithi.orderservice.service;
 import com.nithi.orderservice.dto.InventoryResponse;
 import com.nithi.orderservice.dto.OrderLineItemsDto;
 import com.nithi.orderservice.dto.OrderRequest;
+import com.nithi.orderservice.event.OrderPlacedEvent;
 import com.nithi.orderservice.model.Order;
 import com.nithi.orderservice.model.OrderLineItems;
 import com.nithi.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -20,8 +22,9 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
-    public void placeOrder(OrderRequest orderRequest){
+    public String placeOrder(OrderRequest orderRequest){
 
         Order order = new Order();
         order.setOrderNumber(UUID.randomUUID().toString());
@@ -42,7 +45,10 @@ public class OrderService {
         boolean productIsInStock = Arrays.stream(inventoryResponses).allMatch(InventoryResponse::isInStock);
 
         if (productIsInStock){
+
             orderRepository.save(order);
+           kafkaTemplate.send("notificationTopic",new OrderPlacedEvent(order.getOrderNumber()));
+            return "Order placed successfully";
         }else {
             throw new IllegalArgumentException("Product is not in stock, please try again later");
         }
